@@ -1,0 +1,72 @@
+import pandas as pd
+
+df = pd.read_csv("personality_scores.csv" , sep=";")
+df.head(5)
+
+# 1. 
+#Checking any duplications in ID
+    def check_dup_in_id(ID):
+        boolean = not df["ID"].is_unique
+        boolean = df['ID'].duplicated().any() 
+    print(boolean)
+
+# First store boolean array, check then remove
+    duplicate_in_id = df.duplicated(subset=['ID'])
+    if duplicate_in_id.any():
+        print(df.loc[~duplicate_in_id], end = '\n\n')
+    
+
+# Use drop_duplicates method
+    df.drop_duplicates(subset=['id'], inplace=True)
+    print(df)
+
+# Drop the rows example
+    import pandas as pd
+
+    df = pd.DataFrame([[1, 2], [3, 4]], columns = ['a','b'])
+    df2 = pd.DataFrame([[5, 6], [7, 8]], columns = ['a','b'])
+
+    df = df.append(df2)
+
+    # Drop rows with label 0
+    df = df.drop(0)
+
+    print df
+
+
+# Add assert to check that the unique dataframe is the same length as the original
+
+
+
+
+1. Create new columns containing the total score of each of the personality test subscales
+    -Write functions that will calculate the score of each subscale (conscientiousness, emotional stability, openess to new experience, agreeableness, extraversion)
+    ... as a set out in scoring
+
+# not working
+conscientiousness.isnull().sum() 
+
+# not working
+df.loc["Total", "Conscientiousness"] = df.Conscientiousness.sum()
+print(df)
+
+#
+df.append(pd.DataFrame(df.conscientiousness.sum(), index = ["Total_conscientiousness,"], columns = ["conscientiousness"]))
+
+
+
+
+
+
+# Merge department into personality score dataframe
+    new_df1 = pd.read_csv("personality_scores.csv" , sep=";")
+    new_df2 = pd.read_csv("departments.csv" , sep=";")
+
+    new_df1.head(5)
+    new_df2.head(5)
+
+    #Checking the length of both dataframes
+    new_df1.shape #1555row 70col
+    new_df2. #1555row 2col
+
+    # Now assert that the 1555row length are still consistant
